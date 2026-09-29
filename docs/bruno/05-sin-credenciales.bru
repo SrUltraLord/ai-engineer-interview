@@ -1,0 +1,29 @@
+meta {
+  name: 05 Sin credenciales (401)
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/api/v1/docs/query
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "employee_id": "E001",
+    "role": "comercial",
+    "area": "creditos",
+    "query": "texto"
+  }
+}
+
+assert {
+  res.status: eq 401
+  res.body.error.code: eq unauthorized
+}
+
+docs {
+  Sin cabecera Authorization. Se audita `auth_failed`.
+}

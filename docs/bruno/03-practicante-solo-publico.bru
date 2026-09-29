@@ -1,0 +1,37 @@
+meta {
+  name: 03 Practicante: solo publico (E004)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/v1/docs/query
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenE004}}
+}
+body:json {
+  {
+    "employee_id": "E004",
+    "role": "practicante",
+    "area": "creditos",
+    "query": "crédito consumo tasas política"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("solo ve documentos publicos", function () {
+    expect(res.body.citations).to.eql(["DOC-002"]);
+  });
+}
+
+docs {
+  Requiere tokenE004. Clasificación máxima publico: DOC-001 (interno) y DOC-006 (interno) quedan fuera.
+}

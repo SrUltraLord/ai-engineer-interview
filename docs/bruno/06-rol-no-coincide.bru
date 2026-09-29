@@ -1,0 +1,32 @@
+meta {
+  name: 06 Rol declarado distinto (403)
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/api/v1/docs/query
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenE001}}
+}
+body:json {
+  {
+    "employee_id": "E001",
+    "role": "analista_riesgos",
+    "area": "creditos",
+    "query": "texto"
+  }
+}
+
+assert {
+  res.status: eq 403
+  res.body.error.code: eq forbidden
+}
+
+docs {
+  El token es de E001 (comercial) pero el body declara rol analista_riesgos. Se audita `access_denied` y no se invoca al modelo.
+}

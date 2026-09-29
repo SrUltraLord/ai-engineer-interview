@@ -1,0 +1,32 @@
+meta {
+  name: 07 Area no permitida (403)
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/api/v1/docs/query
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenE001}}
+}
+body:json {
+  {
+    "employee_id": "E001",
+    "role": "comercial",
+    "area": "riesgos",
+    "query": "metodología de scoring de riesgo"
+  }
+}
+
+assert {
+  res.status: eq 403
+  res.body.error.code: eq forbidden
+}
+
+docs {
+  E001 solo tiene el área creditos; pedir riesgos es 403.
+}

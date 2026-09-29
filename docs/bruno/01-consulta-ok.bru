@@ -1,0 +1,45 @@
+meta {
+  name: 01 Consulta OK (E001)
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/v1/docs/query
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenE001}}
+}
+body:json {
+  {
+    "employee_id": "E001",
+    "role": "comercial",
+    "area": "creditos",
+    "query": "condiciones y tasas de crédito de consumo"
+  }
+}
+
+assert {
+  res.status: eq 200
+}
+
+tests {
+  test("responde answer y citations", function () {
+    expect(res.body.answer).to.be.a("string");
+    expect(res.body.citations).to.be.an("array");
+  });
+  test("solo documentos de creditos hasta interno", function () {
+    const permitidos = ["DOC-001", "DOC-002", "DOC-006"];
+    res.body.citations.forEach((id) => expect(permitidos).to.include(id));
+  });
+  test("devuelve X-Correlation-ID", function () {
+    expect(res.headers["x-correlation-id"]).to.be.a("string");
+  });
+}
+
+docs {
+  Empleado E001 (comercial, creditos, clasificación máxima interno). Nunca debe citar DOC-003 (confidencial) ni documentos de otras áreas.
+}

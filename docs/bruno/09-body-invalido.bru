@@ -1,0 +1,38 @@
+meta {
+  name: 09 Body invalido (422)
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{baseUrl}}/api/v1/docs/query
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenE001}}
+}
+body:json {
+  {
+    "employee_id": "E001",
+    "role": "comercial",
+    "area": "creditos",
+    "query": ""
+  }
+}
+
+assert {
+  res.status: eq 422
+  res.body.error.code: eq validation_error
+}
+
+tests {
+  test("indica el campo con error", function () {
+    expect(res.body.error.details[0].field).to.equal("query");
+  });
+}
+
+docs {
+  query vacío. Formato de error común: {"error": {"code", "message", "details"}}.
+}
