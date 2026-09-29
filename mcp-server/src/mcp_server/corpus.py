@@ -54,4 +54,36 @@ DOCUMENTS: list[Document] = [
             "El proveedor mantiene disponibilidad del 99,5%."
         ),
     ),
+    Document(
+        id="DOC-007",
+        title="Glosario público de riesgo crediticio",
+        area="riesgos",
+        classification="publico",
+        source="portal-publico",
+        text="El riesgo crediticio es la posibilidad de pérdida por incumplimiento de las obligaciones de un deudor.",
+    ),
+    Document(
+        id="DOC-008",
+        title="Procedimiento de reporte de eventos de riesgo operativo",
+        area="riesgos",
+        classification="interno",
+        source="manual-riesgos",
+        text="Los eventos de riesgo operativo se reportan en un plazo de 24 horas a la unidad de riesgos mediante el formulario interno.",
+    ),
+    Document(
+        id="DOC-009",
+        title="Plan de contingencia de liquidez",
+        area="tesoreria",
+        classification="confidencial",
+        source="comite-alco",
+        text="El plan de contingencia de liquidez define las fuentes de fondeo de emergencia y los umbrales de activación.",
+    ),
+    Document(
+        id="DOC-010",
+        title="Horarios de operación de tesorería",
+        area="tesoreria",
+        classification="publico",
+        source="portal-publico",
+        text="Las operaciones de tesorería se procesan en días hábiles entre las 8:00 y las 16:00 horas.",
+    ),
 ]

@@ -5,8 +5,8 @@ Bicep para desplegar el backend RAG en `eastus2`: Container Apps (agente + MCP),
 ## Despliegue
 ```bash
 az group create -n rg-docsrag -l eastus2
-az deployment group what-if -g rg-docsrag -f main.bicep -p main.bicepparam
-az deployment group create  -g rg-docsrag -f main.bicep -p main.bicepparam
+az deployment group what-if -g rg-docsrag -p main.bicepparam   # ejecutar desde infra/
+az deployment group create  -g rg-docsrag -p main.bicepparam
 ```
 
 ## Pasos manuales
