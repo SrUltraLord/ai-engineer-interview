@@ -86,3 +86,12 @@ async def test_tool_honors_configured_top_k():
             {"query": "crédito consumo", "area_filter": "creditos", "classification_filter": "confidencial"},
         )
     assert len(result.structuredContent["result"]) == 1
+
+
+async def test_filter_params_are_plain_strings_in_schema():
+    """Sin anyOf/null: los clientes de UI (MCP Inspector) los renderizan como campos de texto."""
+    server = build_server(Settings())
+    async with create_connected_server_and_client_session(server._mcp_server) as client:
+        props = (await client.list_tools()).tools[0].inputSchema["properties"]
+    for name in ("query", "area_filter", "classification_filter"):
+        assert props[name]["type"] == "string" and "anyOf" not in props[name]

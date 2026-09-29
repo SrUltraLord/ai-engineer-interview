@@ -3,6 +3,7 @@ param location string
 param tags object
 param workspaceId string
 param allowedIps array
+param developerPrincipalId string = ''
 param deployments array // [{ name, model, version, capacity }]
 
 resource account 'Microsoft.CognitiveServices/accounts@2024-10-01' = {
@@ -43,3 +44,14 @@ resource diag 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
 
 output name string = account.name
 output endpoint string = account.properties.endpoint
+
+// Acceso del desarrollador para ejecutar la app localmente (Cognitive Services OpenAI User)
+resource devAccess 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(developerPrincipalId)) {
+  scope: account
+  name: guid(account.id, developerPrincipalId, '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+  properties: {
+    principalId: developerPrincipalId
+    principalType: 'User'
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
+  }
+}

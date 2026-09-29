@@ -1,9 +1,11 @@
 import logging
 import time
 import uuid
+from typing import Annotated
 
 from mcp.server.fastmcp import FastMCP
 from mcp.types import CallToolResult
+from pydantic import Field
 
 from mcp_server.audit import log_tool_call
 from mcp_server.config import Settings
@@ -32,7 +34,13 @@ def build_server(settings: Settings | None = None, backend: SearchBackend | None
 
     @mcp.tool(name=TOOL_NAME)
     def mcp_search_documents(
-        query: str, area_filter: str | None = None, classification_filter: str | None = None
+        query: Annotated[str, Field(description="Texto a buscar")],
+        area_filter: Annotated[
+            str, Field(description="Obligatorio. Área: creditos, riesgos o tesoreria")
+        ] = "",
+        classification_filter: Annotated[
+            str, Field(description="Obligatorio. Nivel máximo: publico, interno o confidencial")
+        ] = "",
     ) -> CallToolResult:
         """Busca documentos internos relevantes para la consulta.
 
