@@ -1,0 +1,32 @@
+meta {
+  name: 10 JSON malformado (400)
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/api/v1/docs/query
+  body: text
+  auth: bearer
+}
+
+headers {
+  Content-Type: application/json
+}
+
+auth:bearer {
+  token: {{tokenE001}}
+}
+
+body:text {
+  {"employee_id": "E001",
+}
+
+assert {
+  res.status: eq 400
+  res.body.error.code: eq bad_request
+}
+
+docs {
+  Cuerpo que no es JSON válido.
+}

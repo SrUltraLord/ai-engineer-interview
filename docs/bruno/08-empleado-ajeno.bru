@@ -1,0 +1,31 @@
+meta {
+  name: 08 Employee id ajeno (403)
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{baseUrl}}/api/v1/docs/query
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{tokenE001}}
+}
+body:json {
+  {
+    "employee_id": "E002",
+    "role": "analista_riesgos",
+    "area": "riesgos",
+    "query": "texto"
+  }
+}
+
+assert {
+  res.status: eq 403
+}
+
+docs {
+  Se intenta suplantar a E002 con el token de E001.
+}
