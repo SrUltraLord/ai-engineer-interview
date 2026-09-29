@@ -26,8 +26,8 @@ param tenantId string = subscription().tenantId
 @description('Audience (App ID URI / client id) del API en Entra ID.')
 param apiAudience string = ''
 
-param chatModel object = { name: 'chat-main', model: 'gpt-4o', version: '2024-08-06', capacity: 30 }
-param fallbackModel object = { name: 'chat-fallback', model: 'gpt-4o-mini', version: '2024-07-18', capacity: 30 }
+param chatModel object = { name: 'chat-main', model: 'gpt-4.1', version: '2025-04-14', capacity: 30 }
+param fallbackModel object = { name: 'chat-fallback', model: 'gpt-4.1-mini', version: '2025-04-14', capacity: 30 }
 param embeddingModel object = { name: 'embeddings', model: 'text-embedding-3-small', version: '1', capacity: 30 }
 
 var tags = { workload: 'docs-rag', environment: 'mvp', managedBy: 'bicep' }

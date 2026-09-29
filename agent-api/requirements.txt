@@ -1,10 +1,17 @@
 # Dependencias de ejecución
 fastapi>=0.115
 langchain-core>=0.3
+langchain-openai>=0.3
+mcp>=1.9,<2
 pydantic>=2.7
+PyJWT>=2.8
+python-dotenv>=1.0
 uvicorn>=0.30
 
 # Desarrollo y tests
 pytest>=8
 pytest-asyncio>=0.24
 httpx>=0.27
+
+# Opcional: Application Insights
+# azure-monitor-opentelemetry>=1.6

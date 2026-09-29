@@ -8,7 +8,7 @@ Servidor MCP construido con el SDK oficial de Python (`mcp`, `FastMCP`) que expo
 
 ---
 
-## HU-MCP-01: Scaffolding del servidor MCP
+## ~~HU-MCP-01: Scaffolding del servidor MCP~~
 
 **Como** desarrollador del agente **quiero** un servidor MCP levantado con FastMCP **para** poder conectarme a él por un transporte estándar.
 
@@ -20,7 +20,7 @@ Servidor MCP construido con el SDK oficial de Python (`mcp`, `FastMCP`) que expo
 
 **Dependencias:** ninguna.
 
-## HU-MCP-02: Tool `mcp_search_documents`
+## ~~HU-MCP-02: Tool `mcp_search_documents`~~
 
 **Como** agente **quiero** invocar `mcp_search_documents(query, area_filter, classification_filter)` **para** obtener documentos con sus metadatos.
 
@@ -33,7 +33,7 @@ Servidor MCP construido con el SDK oficial de Python (`mcp`, `FastMCP`) que expo
 
 **Dependencias:** HU-MCP-01, HU-MCP-03, HU-MCP-04.
 
-## HU-MCP-03: Corpus simulado con documento malicioso
+## ~~HU-MCP-03: Corpus simulado con documento malicioso~~
 
 **Como** evaluador **quiero** un corpus de prueba con varias áreas y clasificaciones **para** validar filtros y defensa contra prompt injection.
 
@@ -45,7 +45,7 @@ Servidor MCP construido con el SDK oficial de Python (`mcp`, `FastMCP`) que expo
 
 **Dependencias:** ninguna.
 
-## HU-MCP-04: Backend de búsqueda con pre-filtro de metadatos
+## ~~HU-MCP-04: Backend de búsqueda con pre-filtro de metadatos~~
 
 **Como** servidor MCP **quiero** un índice de búsqueda **para** recuperar por similitud restringido por metadatos.
 

@@ -15,3 +15,6 @@ class Document(BaseModel):
     classification: Classification
     source: str
     text: str
+
+# Catálogo de áreas válidas para `area_filter`.
+AREAS: tuple[str, ...] = ("creditos", "riesgos", "tesoreria")

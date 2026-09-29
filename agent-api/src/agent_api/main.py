@@ -1,14 +1,8 @@
-from fastapi import FastAPI
+from dotenv import load_dotenv
 
-from agent_api.api import docs
-from agent_api.errors import register_error_handlers
+# Antes de crear la app: Settings.from_env() lee os.environ. No pisa variables ya exportadas.
+load_dotenv()
 
-
-def create_app() -> FastAPI:
-    app = FastAPI(title="Agente RAG - Documentos internos", version="0.1.0")
-    register_error_handlers(app)
-    app.include_router(docs.router)
-    return app
-
+from agent_api.adapters.inbound.http.app import create_app  # noqa: E402
 
 app = create_app()

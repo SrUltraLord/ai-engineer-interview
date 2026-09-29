@@ -45,7 +45,7 @@ var policyXml = '''
   <inbound>
     <base />
     <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized">
-      <openid-config url="https://login.microsoftonline.com/TENANT_ID/v2.0/.well-known/openid-configuration" />
+      <openid-config url="LOGIN_ENDPOINTTENANT_ID/v2.0/.well-known/openid-configuration" />
       <audiences><audience>API_AUDIENCE</audience></audiences>
     </validate-jwt>
     <rate-limit-by-key calls="60" renewal-period="60" counter-key="@(context.Request.IpAddress)" />
@@ -60,7 +60,7 @@ resource policy 'Microsoft.ApiManagement/service/apis/policies@2023-09-01-previe
   name: 'policy'
   properties: {
     format: 'xml'
-    value: replace(replace(policyXml, 'TENANT_ID', tenantId), 'API_AUDIENCE', apiAudience)
+    value: replace(replace(replace(policyXml, 'LOGIN_ENDPOINT', environment().authentication.loginEndpoint), 'TENANT_ID', tenantId), 'API_AUDIENCE', apiAudience)
   }
 }
 
