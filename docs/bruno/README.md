@@ -1,6 +1,6 @@
 # Colección Bruno — Agente RAG
 
-Colección para probar `POST /api/v1/docs/query` con [Bruno](https://www.usebruno.com/). Abre Bruno → *Open Collection* → carpeta `docs/bruno`.
+Colección para probar `POST /api/v1/docs/query` con [Bruno](https://www.usebruno.com/). Abre Bruno → _Open Collection_ → carpeta `docs/bruno`.
 
 ## Preparación
 
@@ -19,31 +19,20 @@ Los tokens duran 1 hora. Los secretos de Bruno se guardan solo en tu máquina (n
 
 ## Requests
 
-| # | Request | Espera |
-| - | ------- | ------ |
-| 01 | Consulta OK (E001) | 200, solo DOC-001/002/006 |
-| 02 | Prompt injection neutralizada | 200, DOC-006 citable, sin documentos fuera de permiso |
-| 03 | Practicante (E004) | 200, solo DOC-002 (público) |
-| 04 | Analista de riesgos (E002) | 200, DOC-004 (confidencial de su área) |
-| 05 | Sin credenciales | 401 `unauthorized` |
-| 06 | Rol declarado distinto | 403 `forbidden` |
-| 07 | Área no permitida | 403 `forbidden` |
-| 08 | Employee id ajeno | 403 `forbidden` |
-| 09 | Body inválido | 422 `validation_error` |
+| #   | Request                       | Espera                                                |
+| --- | ----------------------------- | ----------------------------------------------------- |
+| 01  | Consulta OK (E001)            | 200, solo DOC-001/002/006                             |
+| 02  | Prompt injection neutralizada | 200, DOC-006 citable, sin documentos fuera de permiso |
+| 03  | Practicante (E004)            | 200, solo DOC-002 (público)                           |
+| 04  | Analista de riesgos (E002)    | 200, DOC-004 (confidencial de su área)                |
+| 05  | Sin credenciales              | 401 `unauthorized`                                    |
+| 06  | Rol declarado distinto        | 403 `forbidden`                                       |
+| 07  | Área no permitida             | 403 `forbidden`                                       |
+| 08  | Employee id ajeno             | 403 `forbidden`                                       |
+| 09  | Body inválido                 | 422 `validation_error`                                |
+| 10  | JSON malformado               | 400 `bad_request`                                     |
 
-Cada request incluye asserts/tests. Con el CLI, desde `docs/bruno`:
-
-```bash
-npx @usebruno/cli run --env local \
-  --env-var tokenE001=<jwt> --env-var tokenE002=<jwt> --env-var tokenE004=<jwt>
-```
-
-**400 (JSON malformado):** Bruno no puede enviar un cuerpo JSON inválido (lo normaliza o cambia el `Content-Type`, y la API responde 422), por lo que no hay request para ese caso. Pruébalo con curl:
-
-```bash
-curl -i -X POST http://127.0.0.1:8000/api/v1/docs/query \
-  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"employee_id": '
-```
+Cada request incluye asserts/tests. Con el CLI: `npx @usebruno/cli run --env local` desde `docs/bruno` (con `--env-var tokenE001=... tokenE002=... tokenE004=...`).
 
 El audit log (eventos `access_denied`, `injection_detected`, etc.) se ve en la terminal donde corre `uvicorn`.
 
